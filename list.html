@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta chartset="UTF-8">
+    <title>Hello Vue Forms</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+<body>
+
+    <div id="app">
+
+        <h1>Task List</h1>
+
+        <h2> Enter new task</h2>
+
+        <label>Please enter your to-do task</label>
+        <input v-model="newTask">
+        <br>
+        <button v-on:click="addTask">Add Task</button>
+
+    <ul>
+        <li v-for="task in tasklist">
+            {{ task }}
+        </li>
+
+    </ul>  
+
+
+
+    </div>
+
+
+    <script>
+
+        const { createApp, ref} = Vue 
+
+        createApp({
+
+            setup(){
+
+                const tasklist = ref(['Water plants', 'Pay cellphone', 'Wash floor'])
+                const newTask = ref('')
+                
+                function addTask(){ // here we add newTask to our list
+
+                    if(newTask.value){
+                    tasklist.value.push(newTask.value)
+                    newTask.value = ''
+                }
+                }
+
+                return{
+
+                    tasklist,
+                    newTask,
+                    addTask
+
+                  
+                }
+            }
+
+
+        }).mount('#app')
+    </script>
+    </body>
+    </html>
